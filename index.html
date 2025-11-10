@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vinícius Gabriel | Portfólio & Currículo</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg-dark: #071026; --card: #0f1724; }
+    body { font-family: 'Poppins', sans-serif; background: var(--bg-dark); color: #eef2ff; scroll-behavior: smooth; }
+
+    /* Gradient base behind everything */
+    .gradient-layer {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background: linear-gradient(120deg, rgba(0,198,255,0.12), rgba(127,0,255,0.08), rgba(225,0,255,0.06));
+      background-size: 400% 400%;
+      animation: gradientShift 14s ease infinite;
+      filter: blur(20px) saturate(120%);
+      opacity: 0.9;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Canvas particle layer */
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    /* Header adjustments */
+    header.hero { position: relative; overflow: hidden; }
+
+    /* Wave divider (SVG) */
+    .wave-divider { display: block; width: 100%; line-height: 0; transform: translateY(-3px); }
+
+    /* Fade + slide */
+    .fade-in-up { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .in-view { opacity: 1; transform: translateY(0); }
+
+    /* Project overlay */
+    .project-overlay { transition: opacity .35s ease; opacity: 0; }
+    .project-card:hover .project-overlay { opacity: 1; }
+
+    /* Navbar */
+    .nav-item { transition: color .15s ease; }
+    .nav-item:hover { color: #00e0ff; }
+
+    /* Floating contact buttons */
+    .floating-cta { position: fixed; right: 18px; bottom: 18px; z-index: 60; }
+
+    /* small screens fix */
+    @media (max-width:640px){
+      .nav-right { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background layers -->
+  <div class="gradient-layer" aria-hidden="true"></div>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- NAVBAR -->
+  <nav class="w-full fixed top-0 left-0 bg-transparent z-40">
+    <div class="max-w-6xl mx-auto flex items-center justify-between py-4 px-4 md:px-6">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12h18" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <span class="font-semibold text-white">Vinícius Gabriel</span>
+      </a>
+      <div class="flex items-center gap-6 nav-right">
+        <a class="nav-item text-white/90" href="#sobre">Sobre</a>
+        <a class="nav-item text-white/90" href="#habilidades">Habilidades</a>
+        <a class="nav-item text-white/90" href="#projetos">Projetos</a>
+        <a class="nav-item text-white/90" href="#contato">Contato</a>
+        <a class="ml-3 inline-block bg-white text-blue-700 px-4 py-2 rounded-full font-medium" href="./Currículo Vinicius Gabriel atualizado (1).pdf" download>Baixar CV</a>
+      </div>
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button id="mobileBtn" class="p-2 bg-white/10 rounded-md">Menu</button>
+      </div>
+    </div>
+    <!-- Mobile menu (hide/show) -->
+    <div id="mobileMenu" class="hidden md:hidden bg-gradient-to-b from-white/5 to-transparent">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-3">
+        <a href="#sobre">Sobre</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#contato">Contato</a>
+        <a href="./Currículo Vinicius Gabriel atualizado (1).pdf" download class="mt-2 bg-white text-blue-700 py-2 px-4 rounded-full inline-block w-max">Baixar CV</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO / HEADER -->
+  <header class="hero min-h-[65vh] flex items-center justify-center text-center pt-20 pb-10 px-6">
+    <div class="max-w-5xl mx-auto">
+      <img src="./imgs/_LL_4942.jpg" alt="Foto Vinícius" class="w-28 h-28 md:w-36 md:h-36 rounded-full mx-auto border-4 border-white shadow-lg fade-in-up" />
+      <h1 class="text-4xl md:text-5xl font-extrabold mt-6 mb-2 fade-in-up">Vinícius Gabriel</h1>
+      <p class="text-lg md:text-xl text-white/90 fade-in-up">💻 Programador & Técnico em Informática — Instrutor na Escola Augusta Medeiros</p>
+      <div class="mt-6 flex items-center justify-center gap-4 fade-in-up">
+        <a href="curriculo-vinicius.pdf" class="bg-white text-blue-700 px-6 py-3 rounded-full font-semibold shadow hover:scale-105" download>📄 Baixar CV</a>
+        <a href="#projetos" class="bg-white/10 border border-white/20 px-5 py-3 rounded-full hover:bg-white/6">Ver Projetos</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- SVG wave divider -->
+  <div class="wave-divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg"><path fill="#0b1220" d="M0,32 C360,96 1080,-32 1440,32 L1440,80 L0,80 Z"></path></svg>
+  </div>
+
+  <!-- SOBRE -->
+  <section id="sobre" class="max-w-5xl mx-auto py-16 px-6">
+    <h2 class="text-3xl font-bold text-cyan-300 mb-6">Sobre Mim</h2>
+    <div id="sobre-content" class="space-y-4 text-gray-200">
+      <p>Nasci em <strong>2000</strong> e tive meu primeiro contato com um computador aos <strong>7 anos</strong>. Desde então, a tecnologia sempre me fascinou.</p>
+      <p>Aos <strong>12 anos</strong> comecei a desmontar e montar uma CPU para entender cada componente. Aos <strong>16 anos</strong> já fazia manutenção e montagem de computadores e notebooks para conseguir uma renda extra.</p>
+      <p>Aos <strong>17 anos</strong> precisei trabalhar e acabei atuando na área elétrica por alguns anos, mas não me sentia realizado. Decidi retornar ao meu sonho e ingressei no curso de <strong>Análise e Desenvolvimento de Sistemas</strong>.</p>
+      <p>Logo depois comecei a trabalhar como instrutor de informática — meu desempenho levou a direção da escola a confiar em mim a responsabilidade pela parte tecnológica da instituição. Hoje busco novos desafios para evoluir na área de TI.</p>
+    </div>
+  </section>
+
+  <!-- HABILIDADES -->
+<section id="habilidades" class="max-w-6xl mx-auto py-20 px-6 fade-in-up">
+  <h2 class="text-3xl font-bold mb-10 text-cyan-400 text-center">Minhas Habilidades</h2>
+  <div class="grid md:grid-cols-3 gap-10">
+    
+    <div class="bg-gray-800 p-8 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-500 text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" class="w-16 mx-auto mb-4" alt="">
+      <h3 class="text-xl font-semibold text-cyan-300 mb-2">Desenvolvimento Web</h3>
+      <p class="text-gray-400">Criação de sites e sistemas modernos e responsivos usando HTML, CSS, JavaScript e frameworks.</p>
+    </div>
+
+    <div class="bg-gray-800 p-8 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-500 text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/1006/1006363.png" class="w-16 mx-auto mb-4" alt="">
+      <h3 class="text-xl font-semibold text-cyan-300 mb-2">Manutenção de Computadores</h3>
+      <p class="text-gray-400">Montagem, diagnóstico e reparo de PCs e notebooks, além de otimização de desempenho.</p>
+    </div>
+
+    <div class="bg-gray-800 p-8 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-500 text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/3098/3098090.png" class="w-16 mx-auto mb-4" alt="">
+      <h3 class="text-xl font-semibold text-cyan-300 mb-2">Soluções em Python</h3>
+      <p class="text-gray-400">Criação de scripts, automações e ferramentas personalizadas para otimizar tarefas e sistemas.</p>
+    </div>
+
+  </div>
+</section>
+
+  <!-- PROJETOS -->
+  <section id="projetos" class="py-16">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-cyan-300 mb-8 text-center">Projetos em Destaque</h2>
+
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h3 class="text-2xl font-semibold mb-4">💜 PetClínica São Lázaro — Sistema de Gestão Veterinária</h3>
+          <p class="text-gray-300 mb-4">Sistema web completo para gerenciamento de clínica: agendamentos, pacientes, prontuários, vacinas, estoque e financeiro. Desenvolvido com foco em usabilidade e performance.</p>
+          <ul class="text-gray-400 list-disc list-inside mb-6">
+            <li>Frontend: HTML, CSS, JavaScript</li>
+            <li>Backend: Node.js + MySQL</li>
+            <li>Interface responsiva e intuitiva</li>
+          </ul>
+          <div class="flex gap-3">
+            <!-- opens project page in new tab -->
+            <a href="projeto-petclinica.html" target="_blank" class="bg-cyan-500 px-5 py-3 rounded-full font-semibold shadow hover:bg-cyan-400">Ver Projeto Completo</a>
+            <a href="./imgs/Imagem do WhatsApp de 2025-11-10 à(s) 10.07.53_39e53e54.jpg" target="_blank" class="bg-white text-black px-4 py-3 rounded-full">Abrir Imagem</a>
+          </div>
+        </div>
+
+        <div class="project-card relative rounded-2xl overflow-hidden">
+          <img src="./imgs/Imagem do WhatsApp de 2025-11-10 à(s) 10.07.53_39e53e54.jpg" alt="Dashboard PetClínica" class="w-full rounded-2xl shadow-xl transform transition-transform duration-500 hover:scale-105">
+          <div class="project-overlay absolute inset-0 flex items-center justify-center bg-black/40 rounded-2xl">
+            <a href="projeto-petclinica.html" target="_blank" class="bg-white text-[#06202a] px-5 py-3 rounded-full font-semibold shadow">Abrir Projeto</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="py-16 bg-[#071226]">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold text-cyan-300 mb-6">Contato</h2>
+      <p class="text-gray-300 mb-4">Aberto a novas oportunidades e parcerias. Vamos conversar?</p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="mailto:vinicius@email.com" class="bg-white text-[#06202a] px-5 py-3 rounded-full">✉️ Enviar e-mail</a>
+        <a href="https://wa.me/5599999999999" target="_blank" class="bg-green-500 px-5 py-3 rounded-full">💬 WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating CTA -->
+  <div class="floating-cta">
+    <a href="https://github.com/seuusuario" target="_blank" class="block bg-white/8 backdrop-blur px-4 py-3 rounded-full hover:bg-white/12">GitHub</a>
+  </div>
+
+  <footer class="py-8 text-center text-gray-400 border-t border-gray-800">
+    © 2025 Vinícius Gabriel — Desenvolvido por mim
+  </footer>
+
+  <!-- SCRIPTS: particles, interactions, animations -->
+  <script>
+    // Simple mobile menu toggle
+    const mobileBtn = document.getElementById('mobileBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileBtn) {
+      mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    }
+
+    // Intersection Observer to reveal fade-in-up elements
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('in-view');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-in-up').forEach(el => io.observe(el));
+    // also observe about content paragraphs
+    document.querySelectorAll('#sobre-content p').forEach(p => { p.classList.add('fade-in-up'); io.observe(p); });
+
+    // Particle background (simple canvas)
+    (function(){
+      const canvas = document.getElementById('particle-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = innerWidth;
+      let h = canvas.height = innerHeight;
+      const particles = [];
+      const count = Math.floor((w*h)/120000); // scales with size
+      for (let i=0;i<count;i++){
+        particles.push({
+          x: Math.random()*w,
+          y: Math.random()*h,
+          r: Math.random()*1.8+0.6,
+          vx: (Math.random()-0.5)*0.25,
+          vy: (Math.random()-0.5)*0.25,
+          alpha: Math.random()*0.6 + 0.15
+        });
+      }
+      function resize(){ w=canvas.width=innerWidth; h=canvas.height=innerHeight; }
+      addEventListener('resize', resize);
+      function draw(){
+        ctx.clearRect(0,0,w,h);
+        for (let p of particles){
+          p.x += p.vx; p.y += p.vy;
+          if (p.x<0) p.x=w; if (p.x>w) p.x=0;
+          if (p.y<0) p.y=h; if (p.y>h) p.y=0;
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(200,230,255,${p.alpha})`;
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // Optional: make "Ver Projeto Completo" open project's page in new tab (already has target="_blank")
+    // Smooth scroll when clicking nav anchors (enhanced)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const id = a.getAttribute('href');
+        if (id === '#' || id === '') return;
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+
+</body>
+</html>
