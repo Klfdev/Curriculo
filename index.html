@@ -51,21 +51,8 @@
     .fade-in-up { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
     .in-view { opacity: 1; transform: translateY(0); }
 
-    /* Project overlay */
-    .project-overlay { transition: opacity .35s ease; opacity: 0; }
-    .project-card:hover .project-overlay { opacity: 1; }
-
-    /* Navbar */
-    .nav-item { transition: color .15s ease; }
-    .nav-item:hover { color: #00e0ff; }
-
     /* Floating contact buttons */
     .floating-cta { position: fixed; right: 18px; bottom: 18px; z-index: 60; }
-
-    /* small screens fix */
-    @media (max-width:640px){
-      .nav-right { display: none; }
-    }
   </style>
 </head>
 <body>
@@ -73,39 +60,53 @@
   <div class="gradient-layer" aria-hidden="true"></div>
   <canvas id="particle-canvas"></canvas>
 
-  <nav class="w-full fixed top-0 left-0 bg-transparent z-50">
-    <div class="max-w-6xl mx-auto flex items-center justify-between py-4 px-4 md:px-6">
-      <a href="#" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12h18" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+  <nav class="w-full fixed top-0 left-0 z-50 bg-[#071026]/90 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+    <div class="max-w-6xl mx-auto flex items-center justify-between py-4 px-6">
+      
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-full bg-cyan-500/10 flex items-center justify-center border border-cyan-500/20 group-hover:border-cyan-500/50 transition">
+          <span class="font-bold text-cyan-400 text-lg">VG</span>
         </div>
-        <span class="font-semibold text-white drop-shadow-md">Vinícius Gabriel</span>
+        <span class="font-semibold text-white tracking-wide group-hover:text-cyan-300 transition">Vinícius Gabriel</span>
       </a>
-      <div class="flex items-center gap-6 nav-right">
-        <a class="nav-item text-white/90 drop-shadow-md" href="#sobre">Sobre</a>
-        <a class="nav-item text-white/90 drop-shadow-md" href="#habilidades">Habilidades</a>
-        <a class="nav-item text-white/90 drop-shadow-md" href="#projetos">Projetos</a>
-        <a class="nav-item text-white/90 drop-shadow-md" href="#contato">Contato</a>
-        <a class="ml-3 inline-block bg-white text-blue-700 px-4 py-2 rounded-full font-medium shadow-lg hover:scale-105 transition" href="./Currículo Vinicius Gabriel atualizado (1).pdf" download>Baixar CV</a>
+
+      <div class="hidden md:flex items-center gap-8">
+        <a class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition" href="#sobre">Sobre</a>
+        <a class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition" href="#habilidades">Habilidades</a>
+        <a class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition" href="#projetos">Projetos</a>
+        <a class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition" href="#contato">Contato</a>
+        
+        <a class="bg-white text-[#071026] px-5 py-2 rounded-full font-bold text-sm hover:bg-cyan-50 hover:scale-105 transition shadow-lg hover:shadow-cyan-500/20" 
+           href="./Currículo Vinicius Gabriel atualizado (1).pdf" download>
+          Baixar CV
+        </a>
       </div>
+
       <div class="md:hidden">
-        <button id="mobileBtn" class="p-2 bg-white/10 rounded-md backdrop-blur-md">Menu</button>
+        <button id="mobileBtn" class="p-2 text-white hover:text-cyan-400 focus:outline-none bg-white/5 rounded-lg border border-white/10">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
       </div>
     </div>
-    <div id="mobileMenu" class="hidden md:hidden bg-[#071026]/95 backdrop-blur-xl absolute top-16 left-0 w-full border-b border-white/10">
-      <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col gap-4 text-center">
-        <a href="#sobre" class="text-white py-2">Sobre</a>
-        <a href="#habilidades" class="text-white py-2">Habilidades</a>
-        <a href="#projetos" class="text-white py-2">Projetos</a>
-        <a href="#contato" class="text-white py-2">Contato</a>
-        <a href="./Currículo Vinicius Gabriel atualizado (1).pdf" download class="bg-white text-blue-700 py-3 px-6 rounded-full font-bold inline-block mx-auto">Baixar CV</a>
+
+    <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 w-full bg-[#0f1724] border-b border-gray-800 shadow-2xl">
+      <div class="flex flex-col p-6 space-y-4 text-center">
+        <a href="#sobre" class="text-gray-300 hover:text-white py-3 block border-b border-gray-800/50">Sobre Mim</a>
+        <a href="#habilidades" class="text-gray-300 hover:text-white py-3 block border-b border-gray-800/50">Habilidades</a>
+        <a href="#projetos" class="text-gray-300 hover:text-white py-3 block border-b border-gray-800/50">Meus Projetos</a>
+        <a href="#contato" class="text-gray-300 hover:text-white py-3 block border-b border-gray-800/50">Contato</a>
+        <a href="./Currículo Vinicius Gabriel atualizado (1).pdf" download class="inline-block w-full bg-cyan-600 text-white py-4 rounded-lg font-bold mt-2 active:bg-cyan-700 shadow-lg">
+          Baixar Currículo
+        </a>
       </div>
     </div>
   </nav>
 
-  <header class="hero min-h-[65vh] flex items-center justify-center text-center pt-28 pb-10 px-6">
+  <header class="hero min-h-[70vh] flex items-center justify-center text-center pt-32 pb-10 px-6">
     <div class="max-w-5xl mx-auto relative z-10">
-      <img src="./DGF_1545.jpg" alt="Foto Vinícius Gabriel" class="w-28 h-28 md:w-36 md:h-36 rounded-full mx-auto border-4 border-white shadow-2xl fade-in-up object-cover" />
+      <img src="./DGF_1545.jpg" alt="Foto Vinícius Gabriel" class="w-32 h-32 md:w-40 md:h-40 rounded-full mx-auto border-4 border-white shadow-2xl fade-in-up object-cover" />
       
       <h1 class="text-4xl md:text-5xl font-extrabold mt-6 mb-3 fade-in-up text-white drop-shadow-lg">Vinícius Gabriel</h1>
       
@@ -215,14 +216,14 @@
           </a>
         </div>
 
-        <div class="project-card bg-[#0f1724]/80 backdrop-blur-md border border-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-cyan-500/10 transition transform hover:scale-[1.01]">
+        <div class="project-card bg-[#0f1724]/80 backdrop-blur-md border border-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-cyan-500/10 transition transform hover:scale-[1.01] relative z-30">
           <h3 class="text-2xl font-semibold mb-3 text-orange-300">🛒 E-commerce Moderno</h3>
           <p class="text-gray-300 mb-6 h-auto min-h-[80px]">
             Interface de E-commerce moderna e responsiva. O projeto simula a experiência completa de compra do usuário, com foco em UX (Experiência do Usuário), carrinho dinâmico e design clean.
           </p>
           <a href="https://my-ecommerce-frontend-pi.vercel.app/" 
              target="_blank" 
-             class="inline-block bg-white text-[#06202a] px-6 py-3 rounded-full font-bold shadow hover:bg-gray-200 transition">
+             class="inline-block bg-white text-[#06202a] px-6 py-3 rounded-full font-bold shadow hover:bg-gray-200 transition cursor-pointer">
             Acessar Loja
           </a>
         </div>
@@ -239,13 +240,11 @@
         Sinta-se à vontade para entrar em contato.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href="mailto:vinicius@email.com" class="flex items-center gap-2 bg-white text-[#06202a] px-6 py-3 rounded-full font-bold hover:scale-105 transition">
-          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          Enviar E-mail
+        <a href="mailto:vinicius@email.com" class="flex items-center gap-2 bg-white text-[#06202a] px-6 py-3 rounded-full font-bold hover:scale-105 transition w-full sm:w-auto justify-center">
+          ✉️ Enviar E-mail
         </a>
-        <a href="https://wa.me/5531999999999" target="_blank" class="flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-full font-bold hover:scale-105 transition">
-          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          Chamar no WhatsApp
+        <a href="https://wa.me/5531999999999" target="_blank" class="flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-full font-bold hover:scale-105 transition w-full sm:w-auto justify-center">
+          📱 Chamar no WhatsApp
         </a>
       </div>
     </div>
@@ -262,16 +261,25 @@
   </footer>
 
   <script>
-    // Simple mobile menu toggle
+    // --- Lógica do Menu Mobile ---
     const mobileBtn = document.getElementById('mobileBtn');
     const mobileMenu = document.getElementById('mobileMenu');
+    
+    // Toggle (Abrir/Fechar)
     if (mobileBtn) {
       mobileBtn.addEventListener('click', () => {
         mobileMenu.classList.toggle('hidden');
       });
     }
 
-    // Intersection Observer to reveal fade-in-up elements
+    // Fechar ao clicar em qualquer link do menu
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // --- Animação ao Rolar (Scroll) ---
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) e.target.classList.add('in-view');
@@ -279,13 +287,12 @@
     }, { threshold: 0.12 });
     
     document.querySelectorAll('.fade-in-up').forEach(el => io.observe(el));
-    // also observe about content paragraphs
     document.querySelectorAll('#sobre-content p').forEach(p => { 
       p.classList.add('fade-in-up'); 
       io.observe(p); 
     });
 
-    // Particle background (optimized)
+    // --- Fundo de Partículas ---
     (function(){
       const canvas = document.getElementById('particle-canvas');
       if (!canvas) return;
@@ -293,7 +300,6 @@
       let w = canvas.width = innerWidth;
       let h = canvas.height = innerHeight;
       const particles = [];
-      // Adjust count based on screen size for performance
       const count = Math.floor((w*h)/15000); 
 
       for (let i=0;i<count;i++){
@@ -316,7 +322,6 @@
           p.x += p.vx; p.y += p.vy;
           if (p.x<0) p.x=w; if (p.x>w) p.x=0;
           if (p.y<0) p.y=h; if (p.y>h) p.y=0;
-          
           ctx.beginPath();
           ctx.fillStyle = `rgba(100,200,255,${p.alpha})`;
           ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
@@ -326,20 +331,6 @@
       }
       draw();
     })();
-
-    // Smooth scroll when clicking nav anchors
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        const id = a.getAttribute('href');
-        if (id === '#' || id === '') return;
-        const el = document.querySelector(id);
-        if (!el) return;
-        e.preventDefault();
-        // Close mobile menu if open
-        mobileMenu.classList.add('hidden');
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
   </script>
 
 </body>
