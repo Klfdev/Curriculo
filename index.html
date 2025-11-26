@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Vinícius Gabriel | Portfólio & Currículo</title>
+  <meta name="description" content="Portfólio de Vinícius Gabriel - Desenvolvedor Full Stack e Técnico Especialista.">
+  <title>Vinícius Gabriel | Desenvolvedor & Técnico em TI</title>
 
-  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  
   <style>
     :root { --bg-dark: #071026; --card: #0f1724; }
     body { font-family: 'Poppins', sans-serif; background: var(--bg-dark); color: #eef2ff; scroll-behavior: smooth; }
@@ -41,10 +42,10 @@
     }
 
     /* Header adjustments */
-    header.hero { position: relative; overflow: hidden; }
+    header.hero { position: relative; overflow: hidden; z-index: 10; }
 
     /* Wave divider (SVG) */
-    .wave-divider { display: block; width: 100%; line-height: 0; transform: translateY(-3px); }
+    .wave-divider { display: block; width: 100%; line-height: 0; transform: translateY(-3px); position: relative; z-index: 5; }
 
     /* Fade + slide */
     .fade-in-up { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
@@ -69,191 +70,205 @@
 </head>
 <body>
 
-  <!-- Background layers -->
   <div class="gradient-layer" aria-hidden="true"></div>
   <canvas id="particle-canvas"></canvas>
 
-  <!-- NAVBAR -->
-  <nav class="w-full fixed top-0 left-0 bg-transparent z-40">
+  <nav class="w-full fixed top-0 left-0 bg-transparent z-50">
     <div class="max-w-6xl mx-auto flex items-center justify-between py-4 px-4 md:px-6">
       <a href="#" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12h18" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
         </div>
-        <span class="font-semibold text-white">Vinícius Gabriel</span>
+        <span class="font-semibold text-white drop-shadow-md">Vinícius Gabriel</span>
       </a>
       <div class="flex items-center gap-6 nav-right">
-        <a class="nav-item text-white/90" href="#sobre">Sobre</a>
-        <a class="nav-item text-white/90" href="#habilidades">Habilidades</a>
-        <a class="nav-item text-white/90" href="#projetos">Projetos</a>
-        <a class="nav-item text-white/90" href="#contato">Contato</a>
-        <a class="ml-3 inline-block bg-white text-blue-700 px-4 py-2 rounded-full font-medium" href="./Currículo Vinicius Gabriel atualizado (1).pdf" download>Baixar CV</a>
+        <a class="nav-item text-white/90 drop-shadow-md" href="#sobre">Sobre</a>
+        <a class="nav-item text-white/90 drop-shadow-md" href="#habilidades">Habilidades</a>
+        <a class="nav-item text-white/90 drop-shadow-md" href="#projetos">Projetos</a>
+        <a class="nav-item text-white/90 drop-shadow-md" href="#contato">Contato</a>
+        <a class="ml-3 inline-block bg-white text-blue-700 px-4 py-2 rounded-full font-medium shadow-lg hover:scale-105 transition" href="./Currículo Vinicius Gabriel atualizado (1).pdf" download>Baixar CV</a>
       </div>
-      <!-- Mobile menu button -->
       <div class="md:hidden">
-        <button id="mobileBtn" class="p-2 bg-white/10 rounded-md">Menu</button>
+        <button id="mobileBtn" class="p-2 bg-white/10 rounded-md backdrop-blur-md">Menu</button>
       </div>
     </div>
-    <!-- Mobile menu (hide/show) -->
-    <div id="mobileMenu" class="hidden md:hidden bg-gradient-to-b from-white/5 to-transparent">
-      <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-3">
-        <a href="#sobre">Sobre</a>
-        <a href="#habilidades">Habilidades</a>
-        <a href="#projetos">Projetos</a>
-        <a href="#contato">Contato</a>
-        <a href="./Currículo Vinicius Gabriel atualizado (1).pdf" download class="mt-2 bg-white text-blue-700 py-2 px-4 rounded-full inline-block w-max">Baixar CV</a>
+    <div id="mobileMenu" class="hidden md:hidden bg-[#071026]/95 backdrop-blur-xl absolute top-16 left-0 w-full border-b border-white/10">
+      <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col gap-4 text-center">
+        <a href="#sobre" class="text-white py-2">Sobre</a>
+        <a href="#habilidades" class="text-white py-2">Habilidades</a>
+        <a href="#projetos" class="text-white py-2">Projetos</a>
+        <a href="#contato" class="text-white py-2">Contato</a>
+        <a href="./Currículo Vinicius Gabriel atualizado (1).pdf" download class="bg-white text-blue-700 py-3 px-6 rounded-full font-bold inline-block mx-auto">Baixar CV</a>
       </div>
     </div>
   </nav>
 
-  <!-- HERO / HEADER -->
-  <header class="hero min-h-[65vh] flex items-center justify-center text-center pt-20 pb-10 px-6">
-    <div class="max-w-5xl mx-auto">
-      <img src="./DGF_1545.jpg" alt="Foto Vinícius" class="w-28 h-28 md:w-36 md:h-36 rounded-full mx-auto border-4 border-white shadow-lg fade-in-up" />
-      <h1 class="text-4xl md:text-5xl font-extrabold mt-6 mb-2 fade-in-up">Vinícius Gabriel</h1>
-      <p class="text-lg md:text-xl text-white/90 fade-in-up">💻 Programador & Técnico em Informática — Instrutor na Escola Augusta Medeiros</p>
-      <div class="mt-6 flex items-center justify-center gap-4 fade-in-up">
-        <a href="../Curriculo/Currículo Vinicius Gabriel atualizado (1).pdf" class="bg-white text-blue-700 px-6 py-3 rounded-full font-semibold shadow hover:scale-105" download>📄 Baixar CV</a>
-        <a href="#projetos" class="bg-white/10 border border-white/20 px-5 py-3 rounded-full hover:bg-white/6">Ver Projetos</a>
+  <header class="hero min-h-[65vh] flex items-center justify-center text-center pt-28 pb-10 px-6">
+    <div class="max-w-5xl mx-auto relative z-10">
+      <img src="./DGF_1545.jpg" alt="Foto Vinícius Gabriel" class="w-28 h-28 md:w-36 md:h-36 rounded-full mx-auto border-4 border-white shadow-2xl fade-in-up object-cover" />
+      
+      <h1 class="text-4xl md:text-5xl font-extrabold mt-6 mb-3 fade-in-up text-white drop-shadow-lg">Vinícius Gabriel</h1>
+      
+      <p class="text-lg md:text-xl text-white/90 fade-in-up max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+        Transformando problemas em soluções através do código. 
+        <br class="hidden md:block">
+        <span class="text-cyan-300 font-semibold">Desenvolvedor Full Stack</span>, Técnico Especialista e Instrutor de Tecnologia.
+      </p>
+
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 fade-in-up">
+        <a href="./Currículo Vinicius Gabriel atualizado (1).pdf" class="bg-white text-blue-900 px-8 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition hover:shadow-cyan-500/50 w-full sm:w-auto" download>
+          📄 Baixar Currículo
+        </a>
+        <a href="#projetos" class="bg-white/10 border border-white/30 backdrop-blur-sm px-8 py-3 rounded-full font-medium hover:bg-white/20 transition w-full sm:w-auto">
+          Ver Portfólio
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- SVG wave divider -->
   <div class="wave-divider" aria-hidden="true">
     <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg"><path fill="#0b1220" d="M0,32 C360,96 1080,-32 1440,32 L1440,80 L0,80 Z"></path></svg>
   </div>
 
-  <!-- SOBRE -->
-  <section id="sobre" class="max-w-5xl mx-auto py-16 px-6">
-    <h2 class="text-3xl font-bold text-cyan-300 mb-6">Sobre Mim</h2>
-    <div id="sobre-content" class="space-y-4 text-gray-200">
-      <p>Nasci em <strong>2000</strong> e tive meu primeiro contato com um computador aos <strong>7 anos</strong>. Desde então, a tecnologia sempre me fascinou.</p>
-      <p>Aos <strong>12 anos</strong> comecei a desmontar e montar uma CPU para entender cada componente. Aos <strong>16 anos</strong> já fazia manutenção e montagem de computadores e notebooks para conseguir uma renda extra.</p>
-      <p>Aos <strong>17 anos</strong> precisei trabalhar e acabei atuando na área elétrica por alguns anos, mas não me sentia realizado. Decidi retornar ao meu sonho e ingressei no curso de <strong>Análise e Desenvolvimento de Sistemas</strong>.</p>
-      <p>Logo depois comecei a trabalhar como instrutor de informática — meu desempenho levou a direção da escola a confiar em mim a responsabilidade pela parte tecnológica da instituição. Hoje busco novos desafios para evoluir na área de TI.</p>
+  <section id="sobre" class="max-w-4xl mx-auto py-16 px-6 relative z-20">
+    <h2 class="text-3xl font-bold text-cyan-300 mb-8 text-center md:text-left">Minha Jornada</h2>
+    <div id="sobre-content" class="space-y-6 text-gray-200 text-lg leading-relaxed">
+      <p>
+        Minha conexão com a tecnologia vai além do código; ela começou no hardware. Aos <strong>12 anos</strong>, eu já desmontava computadores para entender a lógica por trás da máquina, o que me deu uma base técnica sólida que poucos desenvolvedores possuem hoje.
+      </p>
+      <p>
+        Minha trajetória profissional me ensinou o valor da disciplina. Atuei no setor elétrico, onde desenvolvi resiliência e trabalho em equipe, mas minha verdadeira vocação sempre foi a tecnologia. Retomei meu foco ingressando em <strong>Análise e Desenvolvimento de Sistemas</strong>.
+      </p>
+      <p>
+        Atualmente, sou <strong>Instrutor de Informática</strong> e responsável pela infraestrutura tecnológica da <em>Escola Augusta Medeiros</em>. Essa experiência aprimorou minha capacidade de comunicação, liderança e resolução rápida de problemas.
+      </p>
+      <p class="border-l-4 border-cyan-400 pl-4 italic text-gray-400 bg-white/5 p-4 rounded-r-lg">
+        Hoje, busco transicionar totalmente para o desenvolvimento de software, unindo minha visão lógica de hardware com a criatividade da programação para criar soluções robustas e eficientes.
+      </p>
     </div>
   </section>
 
-  <!-- HABILIDADES -->
-<section id="habilidades" class="max-w-6xl mx-auto py-20 px-6 fade-in-up">
-  <h2 class="text-3xl font-bold mb-10 text-cyan-400 text-center">Minhas Habilidades</h2>
-  <div class="grid md:grid-cols-3 gap-10">
-    
-    <div class="bg-gray-800 p-8 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-500 text-center">
-      <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" class="w-16 mx-auto mb-4" alt="">
-      <h3 class="text-xl font-semibold text-cyan-300 mb-2">Desenvolvimento Web</h3>
-      <p class="text-gray-400">Criação de sites e sistemas modernos e responsivos usando HTML, CSS, JavaScript e frameworks.</p>
-    </div>
-
-    <div class="bg-gray-800 p-8 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-500 text-center">
-      <img src="https://cdn-icons-png.flaticon.com/512/1006/1006363.png" class="w-16 mx-auto mb-4" alt="">
-      <h3 class="text-xl font-semibold text-cyan-300 mb-2">Manutenção de Computadores</h3>
-      <p class="text-gray-400">Montagem, diagnóstico e reparo de PCs e notebooks, além de otimização de desempenho.</p>
-    </div>
-
-    <div class="bg-gray-800 p-8 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-500 text-center">
-      <img src="https://cdn-icons-png.flaticon.com/512/3098/3098090.png" class="w-16 mx-auto mb-4" alt="">
-      <h3 class="text-xl font-semibold text-cyan-300 mb-2">Soluções em Python</h3>
-      <p class="text-gray-400">Criação de scripts, automações e ferramentas personalizadas para otimizar tarefas e sistemas.</p>
-    </div>
-
-  </div>
-</section>
-<!-- PROJETOS -->
-<section id="projetos" class="py-16">
-  <div class="max-w-6xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-cyan-300 mb-12 text-center">Projetos em Destaque</h2>
-
-    <!-- Grid 2x2 -->
-    <div class="grid md:grid-cols-2 gap-12">
-
-      <!-- PROJETO 1 -->
-      <div class="project-card bg-[#0f1724]/60 rounded-2xl p-6 shadow-lg hover:scale-[1.02] transition">
-        <h3 class="text-2xl font-semibold mb-3">💜 PetClínica São Lázaro</h3>
-        <p class="text-gray-300 mb-4">
-          Sistema completo para gerenciamento de clínica veterinária:
-          agendamentos, pacientes, vacinas, estoque e financeiro.
-        </p>
-        <a href="https://klfdev.github.io/clinica/" 
-           target="_blank"
-           class="inline-block bg-white text-[#06202a] px-5 py-3 rounded-full font-semibold shadow">
-          Ver Projeto
-        </a>
+  <section id="habilidades" class="max-w-6xl mx-auto py-20 px-6 fade-in-up relative z-20">
+    <h2 class="text-3xl font-bold mb-10 text-cyan-400 text-center">Competências Técnicas</h2>
+    <div class="grid md:grid-cols-3 gap-10">
+      
+      <div class="bg-gray-800/80 backdrop-blur p-8 rounded-2xl shadow-xl hover:shadow-cyan-500/20 hover:-translate-y-2 transition duration-500 text-center border border-gray-700">
+        <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" class="w-16 mx-auto mb-4" alt="Web Dev Icon">
+        <h3 class="text-xl font-semibold text-cyan-300 mb-2">Desenvolvimento Full Stack</h3>
+        <p class="text-gray-400">Criação de aplicações web robustas e responsivas utilizando HTML5, CSS3, JavaScript e frameworks modernos.</p>
       </div>
 
-      <!-- PROJETO 2 -->
-      <div class="project-card bg-[#0f1724]/60 rounded-2xl p-6 shadow-lg hover:scale-[1.02] transition">
-        <h3 class="text-2xl font-semibold mb-3">📊 Dashboard Escolar</h3>
-        <p class="text-gray-300 mb-4">
-          Dashboard moderno para gestão escolar usando HTML, CSS e JavaScript.
-          Criado para apresentar dados de desempenho e presença de alunos.
-        </p>
-        <a href="#" 
-           target="_blank"
-           class="inline-block bg-white text-[#06202a] px-5 py-3 rounded-full font-semibold shadow">
-          Ver Projeto
-        </a>
+      <div class="bg-gray-800/80 backdrop-blur p-8 rounded-2xl shadow-xl hover:shadow-cyan-500/20 hover:-translate-y-2 transition duration-500 text-center border border-gray-700">
+        <img src="https://cdn-icons-png.flaticon.com/512/1006/1006363.png" class="w-16 mx-auto mb-4" alt="Hardware Icon">
+        <h3 class="text-xl font-semibold text-cyan-300 mb-2">Infraestrutura & Hardware</h3>
+        <p class="text-gray-400">Diagnóstico avançado, montagem de setups de alta performance e manutenção preventiva/corretiva de equipamentos.</p>
       </div>
 
-      <!-- PROJETO 3 -->
-      <div class="project-card bg-[#0f1724]/60 rounded-2xl p-6 shadow-lg hover:scale-[1.02] transition">
-        <h3 class="text-2xl font-semibold mb-3">🤖 Automação com Python</h3>
-        <p class="text-gray-300 mb-4">
-          Este projeto é um Dashboard Analítico Completo para vendas, desenvolvido em Python usando Streamlit e Pandas. Ele demonstra habilidades em análise de dados, engenharia de features e desenvolvimento de aplicações web.
-        </p>
-        <a href="https://daashboardpy-myusvgtpisnwax4fxsrwfr.streamlit.app/" 
-           target="_blank"
-           class="inline-block bg-white text-[#06202a] px-5 py-3 rounded-full font-semibold shadow">
-          Ver Projeto
-        </a>
-      </div>
-
-      <!-- PROJETO 4 -->
-      <div class="project-card bg-[#0f1724]/60 rounded-2xl p-6 shadow-lg hover:scale-[1.02] transition relative z-10">
-        <h3 class="text-2xl font-semibold mb-3">🛒 Loja Virtual Simples</h3>
-        <p class="text-gray-300 mb-4">
-          Ecommerce básico com carrinho, listagem de produtos e área administrativa.
-        </p>
-        <a href="https://my-ecommerce-frontend-pi.vercel.app/" 
-           target="_blank" 
-           class="inline-block bg-white text-[#06202a] px-5 py-3 rounded-full font-semibold shadow hover:bg-gray-200 transition cursor-pointer">
-          Ver Projeto
-        </a>
+      <div class="bg-gray-800/80 backdrop-blur p-8 rounded-2xl shadow-xl hover:shadow-cyan-500/20 hover:-translate-y-2 transition duration-500 text-center border border-gray-700">
+        <img src="https://cdn-icons-png.flaticon.com/512/3098/3098090.png" class="w-16 mx-auto mb-4" alt="Python Icon">
+        <h3 class="text-xl font-semibold text-cyan-300 mb-2">Automação & Dados</h3>
+        <p class="text-gray-400">Desenvolvimento de scripts em Python para automação de tarefas repetitivas e análise de dados (Pandas/Streamlit).</p>
       </div>
 
     </div>
-  </div>
-</section>
+  </section>
 
-  <!-- CONTATO -->
-  <section id="contato" class="py-16 bg-[#071226]">
+  <section id="projetos" class="py-16 relative z-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-cyan-300 mb-12 text-center">Projetos em Destaque</h2>
+
+      <div class="grid md:grid-cols-2 gap-12">
+
+        <div class="project-card bg-[#0f1724]/80 backdrop-blur-md border border-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-cyan-500/10 transition transform hover:scale-[1.01]">
+          <h3 class="text-2xl font-semibold mb-3 text-purple-300">💜 PetClínica São Lázaro</h3>
+          <p class="text-gray-300 mb-6 h-auto min-h-[80px]">
+            Sistema integral de gestão veterinária desenvolvido para otimizar processos. Conta com controle de prontuários, agendamento inteligente, gestão de estoque e fluxo de caixa.
+          </p>
+          <a href="https://klfdev.github.io/clinica/" 
+             target="_blank" 
+             class="inline-block bg-white text-[#06202a] px-6 py-3 rounded-full font-bold shadow hover:bg-gray-200 transition">
+            Ver Projeto Online
+          </a>
+        </div>
+
+        <div class="project-card bg-[#0f1724]/80 backdrop-blur-md border border-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-cyan-500/10 transition transform hover:scale-[1.01]">
+          <h3 class="text-2xl font-semibold mb-3 text-blue-300">📊 Dashboard Escolar</h3>
+          <p class="text-gray-300 mb-6 h-auto min-h-[80px]">
+            Painel administrativo focado em visualização de dados (Data Viz). Interface moderna que permite o acompanhamento métrico de desempenho e frequência escolar em tempo real.
+          </p>
+          <a href="#" 
+             target="_blank" 
+             class="inline-block bg-white text-[#06202a] px-6 py-3 rounded-full font-bold shadow hover:bg-gray-200 transition opacity-80 cursor-not-allowed" title="Em breve">
+            Ver Projeto (Em breve)
+          </a>
+        </div>
+
+        <div class="project-card bg-[#0f1724]/80 backdrop-blur-md border border-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-cyan-500/10 transition transform hover:scale-[1.01]">
+          <h3 class="text-2xl font-semibold mb-3 text-green-300">🤖 Automação & Analytics</h3>
+          <p class="text-gray-300 mb-6 h-auto min-h-[80px]">
+            Aplicação analítica robusta desenvolvida com Python, Streamlit e Pandas. Realiza o tratamento de dados brutos e gera insights estratégicos de vendas através de gráficos interativos.
+          </p>
+          <a href="https://daashboardpy-myusvgtpisnwax4fxsrwfr.streamlit.app/" 
+             target="_blank" 
+             class="inline-block bg-white text-[#06202a] px-6 py-3 rounded-full font-bold shadow hover:bg-gray-200 transition">
+            Ver Dashboard
+          </a>
+        </div>
+
+        <div class="project-card bg-[#0f1724]/80 backdrop-blur-md border border-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-cyan-500/10 transition transform hover:scale-[1.01]">
+          <h3 class="text-2xl font-semibold mb-3 text-orange-300">🛒 E-commerce Moderno</h3>
+          <p class="text-gray-300 mb-6 h-auto min-h-[80px]">
+            Interface de E-commerce moderna e responsiva. O projeto simula a experiência completa de compra do usuário, com foco em UX (Experiência do Usuário), carrinho dinâmico e design clean.
+          </p>
+          <a href="https://my-ecommerce-frontend-pi.vercel.app/" 
+             target="_blank" 
+             class="inline-block bg-white text-[#06202a] px-6 py-3 rounded-full font-bold shadow hover:bg-gray-200 transition">
+            Acessar Loja
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" class="py-20 bg-[#071226] relative z-20 border-t border-gray-800">
     <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold text-cyan-300 mb-6">Contato</h2>
-      <p class="text-gray-300 mb-4">Aberto a novas oportunidades e parcerias. Vamos conversar?</p>
-      <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="mailto:vinicius@email.com" class="bg-white text-[#06202a] px-5 py-3 rounded-full">✉️ Enviar e-mail</a>
-        <a href="https://wa.me/5599999999999" target="_blank" class="bg-green-500 px-5 py-3 rounded-full">💬 WhatsApp</a>
+      <h2 class="text-3xl font-bold text-cyan-300 mb-6">Vamos Conversar?</h2>
+      <p class="text-gray-300 mb-8 text-lg">
+        Estou disponível para novos projetos e oportunidades de carreira. <br>
+        Sinta-se à vontade para entrar em contato.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="mailto:vinicius@email.com" class="flex items-center gap-2 bg-white text-[#06202a] px-6 py-3 rounded-full font-bold hover:scale-105 transition">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          Enviar E-mail
+        </a>
+        <a href="https://wa.me/5531999999999" target="_blank" class="flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-full font-bold hover:scale-105 transition">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Chamar no WhatsApp
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- Floating CTA -->
   <div class="floating-cta">
-    <a href="https://github.com/seuusuario" target="_blank" class="block bg-white/8 backdrop-blur px-4 py-3 rounded-full hover:bg-white/12">GitHub</a>
+    <a href="https://github.com/seuusuario" target="_blank" class="block bg-white/10 backdrop-blur-md border border-white/20 px-4 py-3 rounded-full hover:bg-white/20 transition text-sm font-semibold">
+      GitHub
+    </a>
   </div>
 
-  <footer class="py-8 text-center text-gray-400 border-t border-gray-800">
-    © 2025 Vinícius Gabriel — Desenvolvido por mim
+  <footer class="py-8 text-center text-gray-500 border-t border-gray-900 bg-[#050b1a] relative z-20">
+    <p>© 2025 Vinícius Gabriel. Todos os direitos reservados.</p>
   </footer>
 
-  <!-- SCRIPTS: particles, interactions, animations -->
   <script>
     // Simple mobile menu toggle
     const mobileBtn = document.getElementById('mobileBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     if (mobileBtn) {
-      mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+      mobileBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
     }
 
     // Intersection Observer to reveal fade-in-up elements
@@ -262,11 +277,15 @@
         if (e.isIntersecting) e.target.classList.add('in-view');
       });
     }, { threshold: 0.12 });
+    
     document.querySelectorAll('.fade-in-up').forEach(el => io.observe(el));
     // also observe about content paragraphs
-    document.querySelectorAll('#sobre-content p').forEach(p => { p.classList.add('fade-in-up'); io.observe(p); });
+    document.querySelectorAll('#sobre-content p').forEach(p => { 
+      p.classList.add('fade-in-up'); 
+      io.observe(p); 
+    });
 
-    // Particle background (simple canvas)
+    // Particle background (optimized)
     (function(){
       const canvas = document.getElementById('particle-canvas');
       if (!canvas) return;
@@ -274,27 +293,32 @@
       let w = canvas.width = innerWidth;
       let h = canvas.height = innerHeight;
       const particles = [];
-      const count = Math.floor((w*h)/120000); // scales with size
+      // Adjust count based on screen size for performance
+      const count = Math.floor((w*h)/15000); 
+
       for (let i=0;i<count;i++){
         particles.push({
           x: Math.random()*w,
           y: Math.random()*h,
-          r: Math.random()*1.8+0.6,
-          vx: (Math.random()-0.5)*0.25,
-          vy: (Math.random()-0.5)*0.25,
-          alpha: Math.random()*0.6 + 0.15
+          r: Math.random()*1.5+0.5,
+          vx: (Math.random()-0.5)*0.2,
+          vy: (Math.random()-0.5)*0.2,
+          alpha: Math.random()*0.5 + 0.1
         });
       }
+
       function resize(){ w=canvas.width=innerWidth; h=canvas.height=innerHeight; }
-      addEventListener('resize', resize);
+      window.addEventListener('resize', resize);
+
       function draw(){
         ctx.clearRect(0,0,w,h);
         for (let p of particles){
           p.x += p.vx; p.y += p.vy;
           if (p.x<0) p.x=w; if (p.x>w) p.x=0;
           if (p.y<0) p.y=h; if (p.y>h) p.y=0;
+          
           ctx.beginPath();
-          ctx.fillStyle = `rgba(200,230,255,${p.alpha})`;
+          ctx.fillStyle = `rgba(100,200,255,${p.alpha})`;
           ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
           ctx.fill();
         }
@@ -303,8 +327,7 @@
       draw();
     })();
 
-    // Optional: make "Ver Projeto Completo" open project's page in new tab (already has target="_blank")
-    // Smooth scroll when clicking nav anchors (enhanced)
+    // Smooth scroll when clicking nav anchors
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click', (e)=>{
         const id = a.getAttribute('href');
@@ -312,6 +335,8 @@
         const el = document.querySelector(id);
         if (!el) return;
         e.preventDefault();
+        // Close mobile menu if open
+        mobileMenu.classList.add('hidden');
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
@@ -319,10 +344,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
